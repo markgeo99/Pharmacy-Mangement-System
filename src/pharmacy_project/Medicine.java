@@ -81,13 +81,14 @@ public class Medicine {
 
     public void Show_Medicine_in_Inventory() {
 
-        line = IDt + Namet + Pricet + Quantityt;
+      line =IDt+ Namet+ Pricet+ Quantityt;
         try {
             Scanner sc = new Scanner(new File(inventory_filename));
             FileReader fr = new FileReader(inventory_filename);
             BufferedReader br = new BufferedReader(fr);
             if (!sc.hasNext()) {
                 System.out.println("This File is empty");
+                System.out.println("--------------------------------");
             }
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
@@ -95,8 +96,9 @@ public class Medicine {
             }
             br.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("--------------------------------");
-            System.out.println("There is no File to Show Data");
+            System.out.println(
+                    "Unable to open file '"
+                    + inventory_filename + "'");
             System.out.println("--------------------------------");
         } catch (IOException ex) {
             System.out.println(
@@ -104,9 +106,6 @@ public class Medicine {
                     + inventory_filename + "'");
             System.out.println("--------------------------------");
 
-        } catch (Exception ex) {
-            System.out.println("Medicine doesn't exist");
-            System.out.println("--------------------------------");
         }
 
     }

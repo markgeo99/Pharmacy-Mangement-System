@@ -14,6 +14,7 @@ public class Order {
     private ArrayList<Integer> NewQ = new ArrayList<>();
     private ArrayList<String> ID = new ArrayList<>();
     private ArrayList<String> neworder = new ArrayList<>();
+    private ArrayList<Double> totalprice = new ArrayList<>();
 
     public Order() {
 
@@ -170,39 +171,42 @@ public class Order {
 
     }
 
-    public ArrayList<Double> getTotalPrice(int newQ, String id) {
-        ArrayList<Double> totalprice = new ArrayList<>();
+    public double getTotalPrice(int newQ, String id) {
         double result = newQ * getPrice_By_ID(id);
-        totalprice.add(result);
-        return totalprice;
+                totalprice.add(result);
+
+        return result;
     }
 
-    public void Receipt(int newQ, String id) {
-        ArrayList<Double> handel = getTotalPrice(newQ, id);
+    public int ReceiptTotalPrice() {
         int total = 0;
-
-        for (int i = 0; i < handel.size(); i++) {
-            total += handel.get(i);
+       for (int i = 0; i < totalprice.size(); i++) {
+            total += totalprice.get(i);
 
         }
+        return total;
+        
 
     }
 
-    public void Display_Receipt() {
+  public void Display_Receipt() {
         int qn;
         String id;
+    
         for (int i = 0; i < ID.size(); i++) {
 
-            qn = NewQ.get(i);
-            id = ID.get(i);
-            System.out.println("--------------------------------");
-           
-            System.out.println("You Order\n" + qn + " " + getName_by_ID(id) + "\nTotal : " + getTotalPrice(qn, id));
-            
+                qn = NewQ.get(i);
+                id = ID.get(i);
+                System.out.println("--------------------------------");
+                System.out.println("**********************************");
+                System.out.println("You Order\n" + qn + " " + getName_by_ID(id) + "\nTotal : " + getTotalPrice(qn, id));
+                
+                System.out.println("**********************************");
+
+
+           }
 
         }
-
-    }
 
     public void Make_Order_plus_Receipt() {
         String id = null;
@@ -231,7 +235,7 @@ public class Order {
 
             }
 
-            getTotalPrice(newQ, id);
+           // getTotalPrice(newQ, id);
             System.out.println("1-Add more orders\n2-Display Receipt ");
             x = in.nextInt();
             System.out.println("--------------------------------");
@@ -239,6 +243,9 @@ public class Order {
         {
         }
         Display_Receipt();
+        System.out.println("Total All Ordered Medicine : " + ReceiptTotalPrice());
+           
+
     }
     }
     

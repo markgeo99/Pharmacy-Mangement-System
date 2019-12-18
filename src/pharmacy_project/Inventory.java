@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class Inventory {
 
@@ -17,8 +18,8 @@ public class Inventory {
     public Inventory() {
     }
 
-    public void Delete(String filename, String removedTerm) throws IOException {
-         String tempfile = "temp.txt";
+    public void Delete(String filename, String removedTerm) {
+        String tempfile = "temp.txt";
         File oldfile = new File(filename);
         File newfile = new File(tempfile);
         String Name = "";
@@ -27,31 +28,39 @@ public class Inventory {
         String Quantity = "";
 
         try {
-            FileWriter fw = new FileWriter(tempfile, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
+
+//            PrintWriter pw = new PrintWriter(bw);
             Scanner sc = new Scanner(new File(filename));
+
+            ArrayList<String> file = new ArrayList<>();
             sc.useDelimiter("[,\n]");
-            boolean isDelete = false;
+
             while (sc.hasNext()) {
                 ID = sc.next();
                 Name = sc.next();
                 Price = sc.next();
                 Quantity = sc.next();
-
                 if (!removedTerm.equals(Name)) {
-                    pw.println(ID + "," + Name + "," + Price + "," + Quantity);
-                    isDelete = true;
+//                    pw.println(ID + "," + Name + "," + Price + "," + Quantity);
+                    file.add(ID + "," + Name + "," + Price + "," + Quantity);
                 }
+
             }
-           
+            
+            FileWriter fw = new FileWriter(filename);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (int i = 0; i < file.size(); i++) {
+                bw.write(file.get(i));
+                bw.write("\n");
+            }
+
+            bw.close();
             sc.close();
-            pw.flush();
-            pw.close();
-            oldfile.delete();
-            File dump = new File(filename);
-            newfile.renameTo(dump);
-           
+//            pw.flush();
+//            pw.close();
+//            oldfile.delete();
+//            File dump = new File(filename);
+//            newfile.renameTo(dump);
 
         } catch (Exception ex) {
             System.out.println("File Not Found!");
@@ -92,7 +101,6 @@ public class Inventory {
             System.out.println("Error");
             System.out.println("--------------------------------");
         }
-        
 
     }
 
