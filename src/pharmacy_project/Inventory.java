@@ -17,18 +17,8 @@ public class Inventory {
     public Inventory() {
     }
 
-    public void D(String filename) {
-        try {
-            java.io.FileWriter fw = new java.io.FileWriter(filename, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-
-        } catch (Exception ex) {
-            System.out.println("Error!");
-        }
-    }
-
     public void Delete(String filename, String removedTerm) throws IOException {
-        String tempfile = "temp.txt";
+         String tempfile = "temp.txt";
         File oldfile = new File(filename);
         File newfile = new File(tempfile);
         String Name = "";
@@ -42,33 +32,37 @@ public class Inventory {
             PrintWriter pw = new PrintWriter(bw);
             Scanner sc = new Scanner(new File(filename));
             sc.useDelimiter("[,\n]");
-
+            boolean isDelete = false;
             while (sc.hasNext()) {
+                ID = sc.next();
                 Name = sc.next();
                 Price = sc.next();
-                ID = sc.next();
                 Quantity = sc.next();
 
                 if (!removedTerm.equals(Name)) {
-                    pw.println(Name + "," + Price + "," + ID + "," + Quantity);
+                    pw.println(ID + "," + Name + "," + Price + "," + Quantity);
+                    isDelete = true;
                 }
             }
+           
             sc.close();
             pw.flush();
             pw.close();
             oldfile.delete();
             File dump = new File(filename);
             newfile.renameTo(dump);
-            System.out.println("-----------------------");
+           
 
         } catch (Exception ex) {
             System.out.println("File Not Found!");
             System.out.println("-----------------------");
 
         }
+
     }
 
-    public int Search(String filename, String name) {
+    public void Search(String filename, String input) {
+
         try {
             Scanner sc = new Scanner(new File(filename));
             sc.useDelimiter("[,\n]");
@@ -79,21 +73,26 @@ public class Inventory {
             String Quantity = null;
 
             while (sc.hasNext()) {
+                ID = sc.next();
                 Name = sc.next();
                 Price = sc.next();
-                ID = sc.next();
                 Quantity = sc.next();
 
-                if (name.equals(Name)) {
-                    System.out.println(Name + " " + Price + " " + ID + " " + Quantity);
+                if (input.equals(Name)) {
+                    System.out.println(ID + " " + Name + " " + Price + " " + Quantity);
+                    System.out.println("Done!");
+                    System.out.println("--------------------------------");
+
                 }
             }
         } catch (FileNotFoundException ex) {
             System.out.println("File not Found");
+            System.out.println("--------------------------------");
         } catch (Exception ex) {
             System.out.println("Error");
+            System.out.println("--------------------------------");
         }
-        return 0;
+        
 
     }
 

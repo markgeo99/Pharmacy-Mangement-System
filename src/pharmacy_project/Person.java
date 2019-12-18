@@ -41,7 +41,7 @@ public abstract class Person {
     }
 
     public String Person_Data() {
-        return   "Name =" + Name + "\nPhoneNymber =" + phone + "\nE_mail =" + E_mail ;
+        return "Name =" + Name + "\nPhoneNymber =" + phone + "\nE_mail =" + E_mail;
     }
 
 }

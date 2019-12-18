@@ -2,8 +2,7 @@ package pharmacy_project;
 
 public class Supplier {
 
-    private Address Address_Of_Supplier = new Address("Masr El Gdeda", "St-Fatima", "Ahmad amean", 15, 2);
-
+    private Address Address;
     private String Name;
     private String Email;
     private int phone;
@@ -11,8 +10,8 @@ public class Supplier {
     public Supplier() {
     }
 
-    public Supplier(String Name, String Email, int phone) {
-
+    public Supplier(Address Address, String Name, String Email, int phone) {
+        this.Address = Address;
         this.Name = Name;
         this.Email = Email;
         this.phone = phone;
@@ -43,16 +42,17 @@ public class Supplier {
 
     }
 
-    public Address getAddress_Of_Supplier() {
-        return Address_Of_Supplier;
+    public Address getAddress() {
+        return Address;
     }
 
-    public void setAddress_Of_Supplier(Address Address_Of_Supplier) {
-        this.Address_Of_Supplier = Address_Of_Supplier;
+    public void setAddress(Address Address) {
+        this.Address = Address;
     }
 
-    public String Display_Supplier_Data() {
-        return "Supplier{\n" + Address_Of_Supplier + "\n Name=" + Name + "\n Email=" + Email + "\n phone=" + phone + '}';
+    @Override
+    public String toString() {
+        return "Supplier{" + "Address=" + Address + ", Name=" + Name + ", Email=" + Email + ", phone=" + phone + '}';
     }
 
 }

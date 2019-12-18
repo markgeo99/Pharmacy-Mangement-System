@@ -1,0 +1,10 @@
+1,comtrex,20,30
+2,congestal,35,30
+3,cold_free,15,30
+4,panadol,10,30
+5,adol,36,30
+6,amosar,22,30
+7,aprovel,15,30
+8,vascor,17,30
+9,atacand,20,30
+10,coversyl,60,30
